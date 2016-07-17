@@ -35,7 +35,9 @@ in petal width. Check out the hint!
 3. _setosa_
 
 *** .hint
-### Enter the numbers into irisApp, and you will have the answer!
+### Enter the numbers into [irisApp][2], and you will have the answer!
+
+[2]: https://alexindata.shinyapps.io/irisApp/ "irisApp"
 
 ---
 
