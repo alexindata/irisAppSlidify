@@ -1,0 +1,92 @@
+---
+title       : The new fantastic app, irisApp
+subtitle    : An R Slidify presentation
+author      : Wei Wei, July 17 2016
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained                # {standalone, draft}
+knit        : slidify::knit2slides
+
+
+
+---
+
+## When you see an iris, have you wondered which species it might be?
+
+### [The new irisApp][1] will give you the answer
+
+
+### All you need to is know the length and width of the sepal and the petal
+
+[1]: https://alexindata.shinyapps.io/irisApp/ "The new irisApp"
+
+--- &radio
+
+## Guess the iris species:
+
+It is 5.1cm in sepal length, 3.5cm in sepal width, 1.4cm in petal length, and 0.2cm
+in petal width. Check out the hint!
+
+1. virginica
+2. versicolor
+3. _setosa_
+
+*** .hint
+### Enter the numbers into irisApp, and you will have the answer!
+
+---
+
+## The iris dataset used for modeling prediction
+
+
+```r
+data(iris)
+str(iris)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+
+---
+
+## Machine learning algorithm used for prediction
+
+### The random forest model
+
+
+```r
+library(randomForest)
+data(iris)
+set.seed(1234)
+ind <- sample(2, nrow(iris), replace = TRUE, prob = c(0.6, 0.4))
+training <- iris[ind == 1, ]
+testing <- iris[ind == 2, ]
+rfMod <- randomForest(Species ~., data=training, importance=TRUE)
+predict <- predict(rfMod, testing)
+```
+
+### The out-of-sample accuracy of the random forest model 
+
+
+```r
+accuracy <- nrow(testing[testing$Species == predict, ]) / nrow(testing)
+round(accuracy * 100, 2)
+```
+
+```
+## [1] 96.08
+```
+
+
+
+
