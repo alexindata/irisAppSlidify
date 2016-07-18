@@ -19,7 +19,7 @@ knit        : slidify::knit2slides
 ### [The new irisApp][1] will give you the answer
 
 
-### All you need to is know the length and width of the sepal and the petal
+### All you need are the lengths and widths of the sepal and the petal
 
 [1]: https://alexindata.shinyapps.io/irisApp/ "The new irisApp"
 
